@@ -4,6 +4,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="t1000" class="springRobot.robot.ModelT1000" />
+    <!-- A bean representing mode T1000 -->
+    <bean id="t1000" class="springRobot.robot.ModelT1000">
+        <constructor-arg ref="sonyHand" />
+        <constructor-arg ref="sonyHead" />
+        <constructor-arg ref="sonyLeg" />
+    </bean>
+
+    <!-- Beans for robot's parts -->
+
+    <!-- Sony -->
+    <bean id="sonyHand" class="springRobot.sony.SonyHand" />
+    <bean id="sonyHead" class="springRobot.sony.SonyHead" />
+    <bean id="sonyLeg" class="springRobot.sony.SonyLeg" />
+
+    <!-- Toshiba -->
+    <bean id="toshibaHand" class="springRobot.toshiba.ToshibaHand" />
+    <bean id="toshibaHead" class="springRobot.toshiba.ToshibaHead" />
+    <bean id="toshibaLeg" class="springRobot.toshiba.ToshibaLeg" />
 
 </beans>

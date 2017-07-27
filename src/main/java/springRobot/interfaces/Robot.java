@@ -7,6 +7,6 @@ package springRobot.interfaces;
  * для создания бинов при помощи Spring Framework
  */
 public interface Robot {
-    void fire();
+    void action();
     void dance();
 }

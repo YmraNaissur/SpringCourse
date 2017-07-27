@@ -20,6 +20,7 @@ public class Start {
         if (obj instanceof ModelT1000) {
             Robot t1000 = (ModelT1000) obj;
             t1000.dance();
+            t1000.action();
         }
     }
 }

@@ -15,12 +15,33 @@ public class Start {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 
-        Object obj = context.getBean("t1000");
+        Robot t1000 = getRobot(context, "t1000");
+        Robot t1000Empty = getRobot(context, "t1000Empty");
+
+        if (t1000 != null) {
+            t1000.action();
+            t1000.checkParameters();
+        }
+
+        if (t1000Empty != null) {
+            t1000Empty.action();
+            t1000Empty.checkParameters();
+        }
+    }
+
+    /**
+     * * Получаем робота из конфигурации Spring по id
+     * @param context контекст приложения, в котором нужно найти робота
+     * @param robotId id робота
+     * @return объект типа Robot с соответствующим id
+     */
+    private static Robot getRobot(ApplicationContext context, String robotId) {
+        Object obj = context.getBean(robotId);
 
         if (obj instanceof ModelT1000) {
-            Robot t1000 = (ModelT1000) obj;
-            t1000.dance();
-            t1000.action();
+            return (ModelT1000) obj;
+        } else {
+            return null;
         }
     }
 }

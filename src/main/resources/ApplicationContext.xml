@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- A bean representing mode T1000 -->
-    <bean id="t1000" class="springRobot.robot.ModelT1000">
-        <constructor-arg ref="sonyHand" />
-        <constructor-arg ref="sonyHead" />
-        <constructor-arg ref="sonyLeg" />
+    <!-- A bean representing model T1000 -->
+    <bean id="t1000" class="springRobot.robot.ModelT1000" p:hand-ref="toshibaHand" p:head-ref="toshibaHead" p:leg-ref="toshibaLeg">
+        <constructor-arg value="Silver" index = "0" type="java.lang.String" />
+        <constructor-arg value="2006" index="1" type="int" />
+        <constructor-arg value="true" index="2" type="boolean" />
+    </bean>
+
+    <!-- A bean representing model T1000 with empty attributes -->
+    <bean id="t1000Empty" class="springRobot.robot.ModelT1000">
+        <constructor-arg ref="sonyHand" index="0"/>
+        <constructor-arg ref="sonyHead" index="1"/>
+        <constructor-arg ref="sonyLeg" index="2" />
     </bean>
 
     <!-- Beans for robot's parts -->

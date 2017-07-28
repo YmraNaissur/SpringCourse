@@ -9,4 +9,5 @@ package springRobot.interfaces;
 public interface Robot {
     void action();
     void dance();
+    void checkParameters();
 }

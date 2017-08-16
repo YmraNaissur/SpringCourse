@@ -18,9 +18,13 @@ public class TestServlet extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<title>Test Servlet</title>");
+        out.println("<link rel='stylesheet' type='text/css' href='" + req.getContextPath() + "/styles/mainStyle.css' media='screen' />");
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>Hello, my dear friend</h1>");
+        out.println("<p><img src='" + req.getContextPath() + "/images/01.jpg' /></p>");
+        out.println("<p><img src='" + req.getContextPath() + "/images/02.jpg' /></p>");
+        out.println("<p><img src='" + req.getContextPath() + "/images/03.jpg' /></p>");
         out.println("</body>");
         out.println("</html>");
         out.close();

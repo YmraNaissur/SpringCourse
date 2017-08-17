@@ -8,6 +8,14 @@
   <servlet>
     <servlet-name>firstServlet</servlet-name>
     <servlet-class>firstServlet.TestServlet</servlet-class>
+      <init-param>
+          <param-name>name</param-name>
+          <param-value>Max</param-value>
+      </init-param>
+      <init-param>
+          <param-name>age</param-name>
+          <param-value>31</param-value>
+      </init-param>
   </servlet>
 
   <servlet-mapping>

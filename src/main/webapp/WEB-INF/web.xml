@@ -1,31 +1,45 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>firstServlet</servlet-name>
-    <servlet-class>firstServlet.TestServlet</servlet-class>
-      <init-param>
-          <param-name>name</param-name>
-          <param-value>Max</param-value>
-      </init-param>
-      <init-param>
-          <param-name>age</param-name>
-          <param-value>31</param-value>
-      </init-param>
-  </servlet>
+    <!-- Первый сервлет -->
+    <servlet>
+        <servlet-name>firstServlet</servlet-name>
+        <servlet-class>firstServlet.TestServlet</servlet-class>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>Max</param-value>
+        </init-param>
+        <init-param>
+            <param-name>age</param-name>
+            <param-value>31</param-value>
+        </init-param>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>firstServlet</servlet-name>
-    <url-pattern>/firstServlet</url-pattern>
-  </servlet-mapping>
+    <!-- Сервлет-калькулятор -->
+    <servlet>
+        <servlet-name>calculatorServlet</servlet-name>
+        <servlet-class>calculatorServlet.CalculatorServlet</servlet-class>
+    </servlet>
 
-  <session-config>
-    <session-timeout>
-      30
-    </session-timeout>
-  </session-config>
+    <!-- Мэппинг первого сервлета -->
+    <servlet-mapping>
+        <servlet-name>firstServlet</servlet-name>
+        <url-pattern>/firstServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Мэппинг сервлета-калькулятора -->
+    <servlet-mapping>
+        <servlet-name>calculatorServlet</servlet-name>
+        <url-pattern>/calculator</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>

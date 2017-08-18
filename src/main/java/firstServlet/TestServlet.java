@@ -14,6 +14,9 @@ import java.util.Enumeration;
  * 15.08.2017
  */
 public class TestServlet extends HttpServlet {
+
+    private int count;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -23,6 +26,11 @@ public class TestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+
+        count++;
+        req.getSession().setAttribute("count", count);
+
         PrintWriter out = resp.getWriter();
 
         // Выводим веб-страницу
@@ -39,6 +47,8 @@ public class TestServlet extends HttpServlet {
             String param = paramNames.nextElement().toString();
             out.println("<p>" + param + " = " + req.getParameter(param) + "</p>");
         }
+
+        out.println("<p>" + req.getSession().getAttribute("count") + "</p>");
 
         out.println("<h1>Hello, " + req.getParameter("p1") + "</h1>");
         out.println("<p><img src='" + req.getContextPath() + "/images/01.jpg' /></p>");

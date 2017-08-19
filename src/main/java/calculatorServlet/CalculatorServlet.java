@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * naissur
@@ -17,10 +16,8 @@ import java.util.List;
  * Параметры запроса: числа one и two, а также operation (add, subtract, multiply, divide)
  */
 public class CalculatorServlet extends HttpServlet {
-    // Здесь будут храниться строки с операциями
-    private List<String> operations = new ArrayList<>();
-
     @Override
+    @SuppressWarnings("unchecked")
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -33,8 +30,6 @@ public class CalculatorServlet extends HttpServlet {
 
         // Определяем или создаем сессию
         HttpSession session = req.getSession(true);
-        // Сразу создал аттрибут, чтобы потом не получать NPE при попытке достать его, когда его еще нет
-        session.setAttribute("operations", operations);
 
         int result = 0; // промежуточный результат операций
         String resultingLine = "";   // результирующая строка, которую будем выводить на страницу
@@ -67,9 +62,21 @@ public class CalculatorServlet extends HttpServlet {
             resultingLine = getStringForOperation(operation, one, two, result);
         }
 
-        // Если сессия новая, очищаем список
+        // Здесь будут храниться строки с операциями
+        // Список сделан локальным, чтобы разные клиенты (потоки) не обращались к одному и тому же экземпляру
+        ArrayList<String> operations;
+
         if (session.isNew()) {
-            operations.clear();
+            // Если сессия новая, создаем новый список
+            operations = new ArrayList<>();
+        } else {
+            // Если сессия новая, то аттрибута operations в ней еще не будет
+            // Поэтому, чтобы не словить NPE, создадим его с пустым списком
+            if (session.getAttribute("operations") == null) {
+                session.setAttribute("operations", new ArrayList<String>());
+            }
+            // Если сессия не новая и список в ней уже есть, извлекаем данные из него
+            operations = (ArrayList<String>) session.getAttribute("operations");
         }
 
         // Добавляем полученную строку в список, а список устанавливаем как атрибут сессии
@@ -80,7 +87,7 @@ public class CalculatorServlet extends HttpServlet {
         out.println("<h3>Всего операций: " + operations.size() + "</h3>");
 
         // Получаем все строки из списка и выводим их
-        for (String s: operations) {
+        for (Object s : operations) {
             out.println("<p>" + s + "</p>");
         }
     }

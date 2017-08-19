@@ -25,6 +25,12 @@
         <servlet-class>calculatorServlet.CalculatorServlet</servlet-class>
     </servlet>
 
+    <!-- Сервлет проверки калькулятора -->
+    <servlet>
+        <servlet-name>checkCalculatorServlet</servlet-name>
+        <servlet-class>calculatorServlet.CheckCalculatorServlet</servlet-class>
+    </servlet>
+
     <!-- Мэппинг первого сервлета -->
     <servlet-mapping>
         <servlet-name>firstServlet</servlet-name>
@@ -35,6 +41,12 @@
     <servlet-mapping>
         <servlet-name>calculatorServlet</servlet-name>
         <url-pattern>/calculator</url-pattern>
+    </servlet-mapping>
+
+    <!-- Мэппинг сервлета проверки калькулятора -->
+    <servlet-mapping>
+        <servlet-name>checkCalculatorServlet</servlet-name>
+        <url-pattern>/checkCalculator</url-pattern>
     </servlet-mapping>
 
     <session-config>

@@ -1,5 +1,6 @@
 package calculatorServlet;
 
+import calculatorServlet.classes.TestObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,5 +38,11 @@ public class CheckCalculatorServlet extends HttpServlet {
         } else {
             out.println("</h3>Операции не найдены</h3>");
         }
+
+        // Выводим в консоль значение поля name объекта TestName,
+        // который был добавлен в качестве аттрибута контекста в классе CalculatorServlet
+        System.out.println("В классе CheckCalculatorServlet: " + ((TestObject)getServletContext().getAttribute("obj")).getName());
+        // Вывод будет осуществлен только после отработки сервлета CalculatorServlet,
+        // т.к. аттрибут контекста мы добавляем в нем
     }
 }

@@ -1,5 +1,6 @@
 package calculatorServlet;
 
+import calculatorServlet.classes.TestObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,10 @@ public class CalculatorServlet extends HttpServlet {
 
         // Определяем или создаем сессию
         HttpSession session = req.getSession(true);
+
+        // Используем TestObject для проверки работы с аттрибутами контекста
+        getServletContext().setAttribute("obj", new TestObject("TestName"));
+        System.out.println("В классе CalculatorServlet: " + ((TestObject)getServletContext().getAttribute("obj")).getName());
 
         int result = 0; // промежуточный результат операций
         String resultingLine = "";   // результирующая строка, которую будем выводить на страницу

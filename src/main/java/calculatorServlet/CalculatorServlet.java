@@ -59,6 +59,7 @@ public class CalculatorServlet extends HttpServlet {
                 break;
             default:
                 resultingLine = "Unexpected operation.";
+                // Если неправильно задали параметры запроса, посылаем ошибку Bad Request
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
 

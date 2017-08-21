@@ -54,6 +54,7 @@ public class CalculatorServlet extends HttpServlet {
                 break;
             default:
                 resultingLine = "Unexpected operation.";
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
 
         // Фомируем строку вида [число1] [операция] [число2] = [результат],

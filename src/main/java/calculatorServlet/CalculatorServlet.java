@@ -30,7 +30,7 @@ public class CalculatorServlet extends HttpServlet {
     @Override
     @SuppressWarnings("unchecked")
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
 
         PrintWriter out = resp.getWriter();
 
@@ -110,7 +110,7 @@ public class CalculatorServlet extends HttpServlet {
         // Заносим список текущего сеанса в элемент карты с ключом sessionID
         ((Map<String, List<String>>) context.getAttribute(OPERATIONS_MAP)).put(sessionID, operations);
 
-        out.println("<h3>ID ваше сессии: " + session.getId() + "</h3>");
+        out.println("<h3>ID вашей сессии: " + session.getId() + "</h3>");
         out.println("<h3>Всего операций: " + operations.size() + "</h3>");
 
         // Получаем все строки из списка и выводим их

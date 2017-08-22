@@ -1,6 +1,8 @@
 package calculatorServlet;
 
 import calculatorServlet.classes.TestObject;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * naissur
@@ -31,6 +36,9 @@ public class CalculatorServlet extends HttpServlet {
 
         // Определяем или создаем сессию
         HttpSession session = req.getSession(true);
+        String sessionID = session.getId(); // Получили строку с ID сеанса
+        // Получаем контекст сервлета
+        ServletContext context = getServletContext();
 
         // Используем TestObject для проверки работы с аттрибутами контекста
         getServletContext().setAttribute("obj", new TestObject("TestName"));
@@ -89,6 +97,13 @@ public class CalculatorServlet extends HttpServlet {
         // Добавляем полученную строку в список, а список устанавливаем как атрибут сессии
         operations.add(resultingLine);
         session.setAttribute("operations", operations);
+
+        if (context.getAttribute("operationsMap") == null) {
+            // Если аттрибута operationsMap в контексте еще нет, создаем новую карту
+            context.setAttribute("operationsMap", new LinkedHashMap<String, List<String>>());
+        }
+        // Заносим список текущего сеанса в элемент карты с ключом sessionID
+        ((Map<String, List<String>>) context.getAttribute("operationsMap")).put(sessionID, operations);
 
         out.println("<h3>ID ваше сессии: " + session.getId() + "</h3>");
         out.println("<h3>Всего операций: " + operations.size() + "</h3>");

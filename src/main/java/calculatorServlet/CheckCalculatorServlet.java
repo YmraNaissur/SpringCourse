@@ -52,7 +52,7 @@ public class CheckCalculatorServlet extends HttpServlet {
         out.println("</td><td>");
 
         // В правом столбце выводим операции всех клиентов
-        Map<String, List<String>> operationsMap = (Map<String, List<String>>) context.getAttribute("operationsMap");
+        Map<String, List<String>> operationsMap = (Map<String, List<String>>) context.getAttribute(CalculatorServlet.OPERATIONS_MAP);
 
         for (String sID : operationsMap.keySet()) {
             out.println("<h3><font color='green'>" + sID + "</font></h3>");

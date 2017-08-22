@@ -31,7 +31,7 @@ public class AllSessionsOperations extends HttpServlet {
         out.println("</tr>");
 
         ServletContext context = getServletContext();
-        Map<String, List<String>> operationsMap = (Map<String, List<String>>) context.getAttribute("operationsMap");
+        Map<String, List<String>> operationsMap = (Map<String, List<String>>) context.getAttribute(CalculatorServlet.OPERATIONS_MAP);
 
         for (String sID: (operationsMap.keySet())) {
             out.println("<tr><td>");

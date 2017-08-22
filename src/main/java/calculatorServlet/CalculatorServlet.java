@@ -22,6 +22,11 @@ import java.util.Map;
  * Параметры запроса: числа one и two, а также operation (add, subtract, multiply, divide)
  */
 public class CalculatorServlet extends HttpServlet {
+    // Имя аттрибута контекста, в котором будут храниться операции всех клиентов
+    static final String OPERATIONS_MAP = "operationsMap";
+    // Имя списка, в котором будут храниться операции текущего клиента
+    private static final String OPERATIONS = "operations";
+
     @Override
     @SuppressWarnings("unchecked")
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -87,23 +92,23 @@ public class CalculatorServlet extends HttpServlet {
         } else {
             // Если сессия новая, то аттрибута operations в ней еще не будет
             // Поэтому, чтобы не словить NPE, создадим его с пустым списком
-            if (session.getAttribute("operations") == null) {
-                session.setAttribute("operations", new ArrayList<String>());
+            if (session.getAttribute(OPERATIONS) == null) {
+                session.setAttribute(OPERATIONS, new ArrayList<String>());
             }
             // Если сессия не новая и список в ней уже есть, извлекаем данные из него
-            operations = (ArrayList<String>) session.getAttribute("operations");
+            operations = (ArrayList<String>) session.getAttribute(OPERATIONS);
         }
 
         // Добавляем полученную строку в список, а список устанавливаем как атрибут сессии
         operations.add(resultingLine);
-        session.setAttribute("operations", operations);
+        session.setAttribute(OPERATIONS, operations);
 
-        if (context.getAttribute("operationsMap") == null) {
+        if (context.getAttribute(OPERATIONS_MAP) == null) {
             // Если аттрибута operationsMap в контексте еще нет, создаем новую карту
-            context.setAttribute("operationsMap", new LinkedHashMap<String, List<String>>());
+            context.setAttribute(OPERATIONS_MAP, new LinkedHashMap<String, List<String>>());
         }
         // Заносим список текущего сеанса в элемент карты с ключом sessionID
-        ((Map<String, List<String>>) context.getAttribute("operationsMap")).put(sessionID, operations);
+        ((Map<String, List<String>>) context.getAttribute(OPERATIONS_MAP)).put(sessionID, operations);
 
         out.println("<h3>ID ваше сессии: " + session.getId() + "</h3>");
         out.println("<h3>Всего операций: " + operations.size() + "</h3>");

@@ -39,7 +39,7 @@ public class AllSessionsOperations extends HttpServlet {
                 out.println(op + "<br />");
             }
             out.println("</td>");
-            out.println("<td>" + sID + "</td></tr>");
+            out.println("<td>" + sID + "</td></tr></table>");
         }
     }
 }

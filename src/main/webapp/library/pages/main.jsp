@@ -1,4 +1,4 @@
-<%--
+<%@ page import="testjdbc.TestConnection" %><%--
   User: karavaev
   Date: 23.08.2017
 --%>
@@ -18,5 +18,11 @@
         <h3>
             ${param["password"]}
         </h3>
+
+        <!-- Скриптлет чисто для теста соединения с БД, потом удалить -->
+        <%
+            TestConnection tc = new TestConnection();
+            tc.check();
+        %>
     </body>
 </html>

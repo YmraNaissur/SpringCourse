@@ -1,4 +1,6 @@
-<%@ page import="testjdbc.TestConnection" %><%--
+<%@ page import="library.beans.author.AuthorList" %>
+<%@ page import="library.beans.author.Author" %>
+<%--
   User: karavaev
   Date: 23.08.2017
 --%>
@@ -15,14 +17,14 @@
         <h3>
             ${param["userName"]}
         </h3>
-        <h3>
-            ${param["password"]}
-        </h3>
 
-        <!-- Скриптлет чисто для теста соединения с БД, потом удалить -->
         <%
-            TestConnection tc = new TestConnection();
-            tc.check();
+            AuthorList authorList = new AuthorList();
+            for (Author a: authorList.getAuthorList()) {
+                %>
+                    <p>Id: <%= a.getId() %>; Name: <%= a.getName() %></p>
+                <%
+            }
         %>
     </body>
 </html>

@@ -1,5 +1,7 @@
 <%@ page import="library.beans.author.AuthorList" %>
 <%@ page import="library.beans.author.Author" %>
+<%@ page import="library.beans.book.BookList" %>
+<%@ page import="library.beans.book.Book" %>
 <%--
   User: karavaev
   Date: 23.08.2017
@@ -24,6 +26,15 @@
                 %>
                     <p>Id: <%= a.getId() %>; Name: <%= a.getName() %></p>
                 <%
+            }
+        %>
+
+        <%
+            BookList bookList = new BookList();
+            for (Book b: bookList.getBookList()) {
+        %>
+        <p>Id: <%= b.getId() %>; Caption: <%= b.getName() %></p>
+        <%
             }
         %>
     </body>

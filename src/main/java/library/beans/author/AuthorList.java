@@ -1,7 +1,6 @@
 package library.beans.author;
 
 import library.db.Database;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,11 +19,15 @@ public class AuthorList {
     private List<Author> authorList = new ArrayList<>();
 
     private List<Author> getAuthors() {
+        Connection conn;
+        Statement stmt = null;
+        ResultSet rs = null;
+
         try {
-            Connection conn = Database.getConnection();
-            Statement stmt = conn.createStatement();
+            conn = Database.getConnection();
+            stmt = conn.createStatement();
             // Получаем все записи таблицы author из БД
-            ResultSet rs = stmt.executeQuery("SELECT * FROM author");
+            rs = stmt.executeQuery("SELECT * FROM author ORDER BY fio ASC");
 
             // Заполняем authorList записями из БД
             while (rs.next()) {
@@ -33,11 +36,20 @@ public class AuthorList {
             }
         } catch (SQLException e) {
             Logger.getLogger(AuthorList.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            // Закрываем Statement и ResultSet
+            try {
+                if (stmt != null) stmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                Logger.getLogger(AuthorList.class.getName()).log(Level.SEVERE, null, e);
+            }
         }
 
         return authorList;
     }
 
+    // Если список авторов пуст, получаем его из БД. Иначе он уже был получен, возвращаем его.
     public List<Author> getAuthorList() {
         return authorList.isEmpty() ? getAuthors() : authorList;
     }

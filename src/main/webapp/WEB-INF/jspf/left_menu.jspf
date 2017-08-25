@@ -1,0 +1,10 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<div id="menu">
+    <h3>
+        <jsp:useBean id="authors" class="library.beans.author.AuthorList" />
+        <c:forEach var="author" items="${authors.authorList}">
+            <p> <c:out value="${author.name}" /> </p>
+        </c:forEach>
+    </h3>
+</div>

@@ -65,7 +65,7 @@
 
     <!-- Страницы по умолчанию -->
     <welcome-file-list>
-        <welcome-file>/library/pages/index.jsp</welcome-file>
+        <welcome-file>/library/index.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- Страницы с ошибками -->

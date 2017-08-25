@@ -1,0 +1,12 @@
+<%@ page pageEncoding="UTF-8" %>
+
+            <div id="clear">
+                <!-- пусто -->
+            </div>
+
+            <div id="footer">
+                <h2>(с) Верховный паладин Макс Кей, 2017 г.</h2>
+            </div>
+        </div> <!-- закрыли блок container -->
+    </body>
+</html>

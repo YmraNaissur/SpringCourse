@@ -2,6 +2,8 @@
 <%@ page import="library.beans.author.Author" %>
 <%@ page import="library.beans.book.BookList" %>
 <%@ page import="library.beans.book.Book" %>
+<%@ page import="library.beans.Genre.GenreList" %>
+<%@ page import="library.beans.Genre.Genre" %>
 <%--
   User: karavaev
   Date: 23.08.2017
@@ -32,9 +34,18 @@
         <%
             BookList bookList = new BookList();
             for (Book b: bookList.getBookList()) {
+                %>
+                <p>Id: <%= b.getId() %>; Caption: <%= b.getName() %></p>
+                <%
+            }
         %>
-        <p>Id: <%= b.getId() %>; Caption: <%= b.getName() %></p>
+
         <%
+            GenreList genreList = new GenreList();
+            for (Genre g : genreList.getGenreList()) {
+                %>
+                <p>Id: <%= g.getId() %>; Genre: <%=g.getName() %></p>
+                <%
             }
         %>
     </body>

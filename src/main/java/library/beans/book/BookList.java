@@ -39,8 +39,8 @@ public class BookList {
         } finally {
             // Закрываем Statement и ResultSet
             try {
-                if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
+                if (rs != null) rs.close();
             } catch (SQLException e) {
                 Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);
             }

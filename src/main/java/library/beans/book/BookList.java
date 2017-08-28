@@ -18,7 +18,36 @@ import java.util.logging.Logger;
 public class BookList {
     private List<Book> bookList = new ArrayList<>();
 
+    // Если список книг пуст, получаем его из БД. Иначе он уже был получен, возвращаем его.
+    public List<Book> getBookList() {
+        return bookList.isEmpty() ? getBooks() : bookList;
+    }
+
+    /**
+     * Получаем список всех книг из таблицы book
+     * @return список, содержащий все книги из таблицы book
+     */
     private List<Book> getBooks() {
+        return selectBooksByQuery("SELECT * FROM book");
+    }
+
+    /**
+     * Получаем список книг по автору
+     * @param author_id ИД автора книги
+     * @return список книг, написанных автором с указанным id
+     */
+    public List<Book> getBooksByAuthor(long author_id) {
+        return selectBooksByQuery("SELECT * FROM library.book WHERE author_id=" + author_id);
+    }
+
+    /**
+     * Метод возвращает список книг в соответствии с SQL-запросом
+     * @param query SQL-запрос
+     * @return список книг, удовлетворяющих SQL-запросу query
+     */
+    private List<Book> selectBooksByQuery(String query) {
+        List<Book> booksByQuery = new ArrayList<>();
+
         Connection conn;
         Statement stmt = null;
         ResultSet rs = null;
@@ -26,13 +55,11 @@ public class BookList {
         try {
             conn = Database.getConnection();
             stmt = conn.createStatement();
-            // Получаем все записи таблицы book из БД
-            rs = stmt.executeQuery("SELECT * FROM book");
+            rs = stmt.executeQuery(query);
 
-            // Заполняем bookList записями из таблицы book
+            // Заполняем booksByQuery записями из таблицы book соответственно переданному запросу
             while (rs.next()) {
-                Book b = new Book(rs.getInt("id"), rs.getString("name"));
-                bookList.add(b);
+                booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name")));
             }
         } catch (SQLException e) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);
@@ -46,11 +73,6 @@ public class BookList {
             }
         }
 
-        return bookList;
-    }
-
-    // Если список книг пуст, получаем его из БД. Иначе он уже был получен, возвращаем его.
-    public List<Book> getBookList() {
-        return bookList.isEmpty() ? getBooks() : bookList;
+        return booksByQuery;
     }
 }

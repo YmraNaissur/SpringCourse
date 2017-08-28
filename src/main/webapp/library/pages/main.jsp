@@ -5,15 +5,16 @@
   Date: 23.08.2017
 --%>
 
-<jsp:useBean id="books" class="library.beans.book.BookList" />
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
             <%@ include file="/WEB-INF/jspf/left_menu.jspf" %>
 
+            <jsp:useBean id="books" class="library.beans.book.BookList" scope="page" />
+
             <div id="content">
                 <h3>
-                    <c:forEach var="book" items="${books.bookList}">
+                    <c:forEach var="book" items="${books.getBooksByAuthor(param.author_id)}">
                         <p> <c:out value="${book.name}" /> </p>
                     </c:forEach>
                 </h3>

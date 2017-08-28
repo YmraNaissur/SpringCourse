@@ -59,7 +59,8 @@ public class BookList {
 
             // Заполняем booksByQuery записями из таблицы book соответственно переданному запросу
             while (rs.next()) {
-                booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name")));
+                booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name"), rs.getInt("page_count"),
+                        rs.getString("isbn")));
             }
         } catch (SQLException e) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);

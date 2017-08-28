@@ -13,11 +13,17 @@
             <jsp:useBean id="books" class="library.beans.book.BookList" scope="page" />
 
             <div id="content">
-                <h3>
+                <table border="1" width="100%">
                     <c:forEach var="book" items="${books.getBooksByAuthor(param.author_id)}">
-                        <p> <c:out value="${book.name}" /> </p>
+                        <tr>
+                            <td>
+                                <h3> <c:out value="${book.name}" /> </h3>
+                                <p> Страниц: <c:out value="${book.pageCount}" /> </p>
+                                <p> ISBN: <c:out value="${book.isbn}" /> </p>
+                            </td>
+                        </tr>
                     </c:forEach>
-                </h3>
+                </table>
             </div>
 
             <%@ include file="/WEB-INF/jspf/footer.jspf" %>

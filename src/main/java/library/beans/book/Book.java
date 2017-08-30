@@ -1,5 +1,7 @@
 package library.beans.book;
 
+import java.sql.Blob;
+
 /**
  * naissur
  * 25.08.2017
@@ -11,16 +13,18 @@ public class Book {
     private String name;    // Название книги
     private int pageCount;  // Количество страниц
     private String isbn;    // ISBN книги
+    private Blob image; // Изображение обложки книги
 
     public Book() {
         // Конструктор по умолчанию
     }
 
-    Book(int id, String name, int pageCount, String isbn) {
+    Book(int id, String name, int pageCount, String isbn, Blob image) {
         this.id = id;
         this.name = name;
         this.pageCount = pageCount;
         this.isbn = isbn;
+        this.image = image;
     }
 
     // Геттеры и сеттеры для полей
@@ -55,5 +59,13 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    Blob getImage() {
+        return image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
     }
 }

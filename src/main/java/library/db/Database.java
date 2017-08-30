@@ -24,7 +24,7 @@ public class Database {
         try {
             InitialContext ic = new InitialContext();
             DataSource ds = (DataSource) ic.lookup("java:/comp/env/jdbc/library");
-            if (conn == null) {
+            if (conn == null || conn.isClosed()) {
                 conn = ds.getConnection();
             }
         } catch (NamingException | SQLException e) {

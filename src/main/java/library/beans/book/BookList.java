@@ -1,10 +1,8 @@
 package library.beans.book;
 
 import library.db.Database;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,7 +46,7 @@ public class BookList {
     private List<Book> selectBooksByQuery(String query) {
         List<Book> booksByQuery = new ArrayList<>();
 
-        Connection conn;
+        Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
 
@@ -60,13 +58,14 @@ public class BookList {
             // Заполняем booksByQuery записями из таблицы book соответственно переданному запросу
             while (rs.next()) {
                 booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name"), rs.getInt("page_count"),
-                        rs.getString("isbn")));
+                        rs.getString("isbn"), rs.getBlob("image")));
             }
         } catch (SQLException e) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             // Закрываем Statement и ResultSet
             try {
+                if (conn != null) conn.close();
                 if (stmt != null) stmt.close();
                 if (rs != null) rs.close();
             } catch (SQLException e) {
@@ -75,5 +74,14 @@ public class BookList {
         }
 
         return booksByQuery;
+    }
+
+    /**
+     * Получаем обложку, соответствующую id книги
+     * @param id ИД книги
+     * @return Объект класса Blob, представляющий собой изображение
+     */
+    public Blob getImageByBookId(long id) {
+        return selectBooksByQuery("SELECT * FROM book WHERE id=" + id).get(0).getImage();
     }
 }

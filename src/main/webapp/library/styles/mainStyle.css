@@ -1,3 +1,18 @@
+h3.bookHeader {
+    color: green;
+    font-family: "Book Antiqua", "Arial", serif;
+}
+
+p.bookInfo {
+    color: darkblue;
+}
+
+hr {
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 #container {
     background-color: beige;
     width: 100%;
@@ -19,7 +34,7 @@
 
 #menu {
     float: left;
-    width: 30%;
+    width: 20%;
     height: 75%;
     box-sizing: border-box;
     padding: 0 40px 0 40px;
@@ -27,7 +42,7 @@
 
 #content {
     float: right;
-    width: 70%;
+    width: 80%;
     height: 75%;
     box-sizing: border-box;
     padding: 0 40px 0 40px;

@@ -7,8 +7,21 @@
 
         <%
             for (Author a : authors.getAuthorList()) {
+                System.out.println(a.getId());
+                System.out.println(request.getParameter("author_id"));
         %>
-            <p><a href="main.jsp?author_id=<%=a.getId()%>&name=<%=a.getName()%>"><%=a.getName()%></a></p>
+            <p>
+                <!-- Если в данный момент отображается страница с определенным автором,
+                ссылка на него в левом меню не будет активной -->
+                <c:choose>
+                    <c:when test='<%=request.getParameter("author_id").equals(String.valueOf(a.getId()))%>'>
+                        <%=a.getName()%>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="main.jsp?author_id=<%=a.getId()%>&name=<%=a.getName()%>"><%=a.getName()%></a>
+                    </c:otherwise>
+                </c:choose>
+            </p>
         <%}%>
 
     </h3>

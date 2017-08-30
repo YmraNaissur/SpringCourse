@@ -13,15 +13,22 @@
             <jsp:useBean id="books" class="library.beans.book.BookList" scope="page" />
 
             <div id="content">
-                <table border="1" width="100%">
+                <table width="100%">
                     <c:forEach var="book" items="${books.getBooksByAuthor(param.author_id)}">
                         <tr>
-                            <td>
-                                <h3> <c:out value="${book.name}" /> </h3>
-                                <p> Страниц: <c:out value="${book.pageCount}" /> </p>
-                                <p> ISBN: <c:out value="${book.isbn}" /> </p>
-                                <img width="140" height="200" src="<c:url value="//imageServlet?id=${book.id}"/>" />
+                            <td align="center" width="200">
+                                <img width="140" height="200" src="<c:url value="///imageServlet?id=${book.id}"/>" />
                             </td>
+                            <td>
+                                <h3 class="bookHeader"> <c:out value="${book.name}" /> </h3>
+                                <p class="bookInfo"><b>Страниц:</b> <c:out value="${book.pageCount}" /> </p>
+                                <p class="bookInfo"><b>ISBN:</b> <c:out value="${book.isbn}" /> </p>
+                            </td>
+                        </tr>
+                        <tr>
+                           <td align="center" colspan="2">
+                               <hr>
+                           </td>
                         </tr>
                     </c:forEach>
                 </table>

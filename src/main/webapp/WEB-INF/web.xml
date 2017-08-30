@@ -33,6 +33,12 @@
         <servlet-class>calculatorServlet.AllSessionsOperations</servlet-class>
     </servlet>
 
+    <!-- Сервлет, отображающий изображения -->
+    <servlet>
+        <servlet-name>imageServlet</servlet-name>
+        <servlet-class>library.servlets.ImageServlet</servlet-class>
+    </servlet>
+
     <!-- Мэппинг первого сервлета -->
     <servlet-mapping>
         <servlet-name>firstServlet</servlet-name>
@@ -55,6 +61,12 @@
     <servlet-mapping>
         <servlet-name>allSessionsOperations</servlet-name>
         <url-pattern>/allSessionsOperations</url-pattern>
+    </servlet-mapping>
+
+    <!-- Мэппинг сервлета вывода изображений -->
+    <servlet-mapping>
+        <servlet-name>imageServlet</servlet-name>
+        <url-pattern>/imageServlet</url-pattern>
     </servlet-mapping>
 
     <session-config>

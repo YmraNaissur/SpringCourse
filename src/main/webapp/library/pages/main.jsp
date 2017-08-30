@@ -20,6 +20,7 @@
                                 <h3> <c:out value="${book.name}" /> </h3>
                                 <p> Страниц: <c:out value="${book.pageCount}" /> </p>
                                 <p> ISBN: <c:out value="${book.isbn}" /> </p>
+                                <img width="140" height="200" src="<c:url value="//imageServlet?id=${book.id}"/>" />
                             </td>
                         </tr>
                     </c:forEach>

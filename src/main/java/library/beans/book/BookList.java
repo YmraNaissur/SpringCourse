@@ -1,7 +1,6 @@
 package library.beans.book;
 
 import library.db.Database;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,15 @@ public class BookList {
      */
     public List<Book> getBooksByAuthor(long author_id) {
         return selectBooksByQuery("SELECT * FROM library.book WHERE author_id=" + author_id);
+    }
+
+    /**
+     * Получаем обложку, соответствующую id книги
+     * @param id ИД книги
+     * @return Объект класса Blob, представляющий собой изображение
+     */
+    public Blob getImageByBookId(long id) {
+        return selectBooksByQuery("SELECT * FROM book WHERE id=" + id).get(0).getImage();
     }
 
     /**
@@ -74,14 +82,5 @@ public class BookList {
         }
 
         return booksByQuery;
-    }
-
-    /**
-     * Получаем обложку, соответствующую id книги
-     * @param id ИД книги
-     * @return Объект класса Blob, представляющий собой изображение
-     */
-    public Blob getImageByBookId(long id) {
-        return selectBooksByQuery("SELECT * FROM book WHERE id=" + id).get(0).getImage();
     }
 }

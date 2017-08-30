@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/library/styles/welcomeStyle.css"/>" media="screen" />
     </head>
     <body>
+        <% request.getSession().invalidate(); %>
         <div class="page">
             <h1>Приветствую, путник!</h1>
 

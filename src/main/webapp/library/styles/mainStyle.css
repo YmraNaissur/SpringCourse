@@ -7,6 +7,10 @@ p.bookInfo {
     color: darkblue;
 }
 
+img.bookCover {
+    border: thick solid antiquewhite;
+}
+
 hr {
     width: 50%;
     margin-top: 30px;
@@ -21,10 +25,24 @@ hr {
 
 #header {
     text-align: center;
+    vertical-align: middle;
     height: 10%;
     width: 100%;
     box-sizing: border-box;
     padding-top: 10px;
+}
+
+#libraryName {
+    float: left;
+    height: 100%;
+    width: 80%;
+}
+
+#greetings {
+    color: red;
+    height: 100%;
+    line-height: 80px;
+    text-align: center;
 }
 
 #search {

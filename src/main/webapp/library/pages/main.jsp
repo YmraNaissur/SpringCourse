@@ -17,7 +17,7 @@
                     <c:forEach var="book" items="${books.getBooksByAuthor(param.author_id)}">
                         <tr>
                             <td align="center" width="200">
-                                <img width="140" height="200" src="<c:url value="///imageServlet?id=${book.id}"/>" />
+                                <img class="bookCover" width="140" height="200" src="<c:url value="///imageServlet?id=${book.id}"/>" />
                             </td>
                             <td>
                                 <h3 class="bookHeader"> <c:out value="${book.name}" /> </h3>

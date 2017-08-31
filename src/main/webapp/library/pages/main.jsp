@@ -20,9 +20,11 @@
                                 <img class="bookCover" width="140" height="200" src="<c:url value="///imageServlet?id=${book.id}"/>" />
                             </td>
                             <td>
-                                <h3 class="bookHeader"> <c:out value="${book.name}" /> </h3>
-                                <p class="bookInfo"><b>Страниц:</b> <c:out value="${book.pageCount}" /> </p>
-                                <p class="bookInfo"><b>ISBN:</b> <c:out value="${book.isbn}" /> </p>
+                                <h3 class="bookHeader"> <c:out value="${book.name}" /></h3>
+                                <p class="bookInfo"><b>Страниц:</b> <c:out value="${book.pageCount}" /></p>
+                                <p class="bookInfo"><b>ISBN:</b> <c:out value="${book.isbn}" /></p>
+                                <p class="bookInfo"><b>Жанр:</b> <c:out value="${book.genre}" /></p>
+                                <p class="bookInfo"><b>Автор:</b> <c:out value="${book.author}" /></p>
                             </td>
                         </tr>
                         <tr>

@@ -13,17 +13,21 @@ public class Book {
     private String name;    // Название книги
     private int pageCount;  // Количество страниц
     private String isbn;    // ISBN книги
+    private String genre;   // Жанр
+    private String author;  // Автор
     private Blob image; // Изображение обложки книги
 
     public Book() {
         // Конструктор по умолчанию
     }
 
-    Book(int id, String name, int pageCount, String isbn, Blob image) {
+    Book(int id, String name, int pageCount, String isbn, Blob image, String genre, String author) {
         this.id = id;
         this.name = name;
         this.pageCount = pageCount;
         this.isbn = isbn;
+        this.genre = genre;
+        this.author = author;
         this.image = image;
     }
 
@@ -59,6 +63,22 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     Blob getImage() {

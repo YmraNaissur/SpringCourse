@@ -1,4 +1,4 @@
-package library.beans.Genre;
+package library.beans.genre;
 
 /**
  * naissur

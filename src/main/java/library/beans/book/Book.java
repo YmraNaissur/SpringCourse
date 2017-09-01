@@ -88,4 +88,9 @@ public class Book {
     public void setImage(Blob image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "{(" + id + ") " + name + ", жанр - " + genre + ", автор - " + author + "}";
+    }
 }

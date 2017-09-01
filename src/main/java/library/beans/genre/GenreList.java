@@ -1,4 +1,4 @@
-package library.beans.genre;
+package library.beans.Genre;
 
 import library.db.Database;
 

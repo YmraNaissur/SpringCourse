@@ -1,5 +1,9 @@
 package firstServlet;
 
+import library.beans.author.AuthorList;
+import library.beans.book.BookList;
+import library.beans.Genre.GenreList;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,5 +61,9 @@ public class TestServlet extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
         out.close();
+
+        System.out.println((new BookList().getBookList()));
+        System.out.println((new AuthorList()).getAuthorList());
+        System.out.println((new GenreList().getGenreList()));
     }
 }

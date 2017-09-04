@@ -46,6 +46,19 @@ public class BookList {
     }
 
     /**
+     * Получаем список книг по первой букве в названии
+     * @param letter первая буква в названии
+     * @return список книг, у которых в названии первая буква равна letter
+     */
+    public List<Book> getBooksByFirstLetter(String letter) {
+        return selectBooksByQuery("SELECT b.id,b.name,b.page_count,b.isbn,b.publish_year,"
+                + "a.fio as author,g.name as genre,b.image FROM book b "
+                + "INNER JOIN author a ON b.author_id=a.id "
+                + "INNER JOIN genre g ON b.genre_id=g.id "
+                + "WHERE SUBSTR(b.name,1,1)='" + letter + "' ORDER BY b.name;");
+    }
+
+    /**
      * Получаем обложку, соответствующую id книги
      * @param id ИД книги
      * @return Объект класса Blob, представляющий собой изображение

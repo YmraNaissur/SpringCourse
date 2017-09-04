@@ -25,7 +25,9 @@
                 }
 
                 // Если делается запрос по первой букве в названии
-
+                if (request.getParameter("letter") != null) {
+                    currentBookList = books.getBooksByFirstLetter(request.getParameter("letter"));
+                }
 
                 // Сохраняем сформированный список в сессию
                 session.setAttribute("currentBookList", currentBookList);

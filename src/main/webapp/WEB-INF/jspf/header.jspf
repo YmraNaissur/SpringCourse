@@ -34,7 +34,10 @@
                     </select>
                     <input type="submit" value="Найти" />
                 </form>
+                <jsp:useBean id="rusLetters" class="library.beans.LetterList" scope="application" />
                 <p>
-                    А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Э Ю Я
+                    <c:forEach var="letter" items="${rusLetters.russianLetters}">
+                        <a href="main.jsp?letter=${letter}">${letter}</a>
+                    </c:forEach>
                 </p>
             </div>

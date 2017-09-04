@@ -1,3 +1,6 @@
+<%@ page import="library.beans.book.Book" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
@@ -12,9 +15,25 @@
 
             <jsp:useBean id="books" class="library.beans.book.BookList" scope="page" />
 
+            <%
+                // Здесь будет содержаться список книг, актуальный для текущего запроса
+                List<Book> currentBookList = new ArrayList<Book>();
+
+                // Если делается запрос по автору (в меню слева)
+                if (request.getParameter("author_id") != null) {
+                    currentBookList = books.getBooksByAuthor(Long.valueOf(request.getParameter("author_id")));
+                }
+
+                // Если делается запрос по первой букве в названии
+
+
+                // Сохраняем сформированный список в сессию
+                session.setAttribute("currentBookList", currentBookList);
+            %>
+
             <div id="content">
                 <table width="100%">
-                    <c:forEach var="book" items="${books.getBooksByAuthor(param.author_id)}">
+                    <c:forEach var="book" items="${currentBookList}">
                         <tr>
                             <td align="center" width="200">
                                 <img class="bookCover" width="140" height="200" src="<c:url value="///imageServlet?id=${book.id}"/>" />

@@ -1,6 +1,7 @@
 package library.beans.book;
 
 import library.db.Database;
+import library.enums.SearchType;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,27 @@ public class BookList {
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id "
                 + "WHERE SUBSTR(b.name,1,1)='" + letter + "' ORDER BY b.name;");
+    }
+
+    /**
+     * Получаем список книг, соответствующих поисковому запросу
+     * @param request поисковый запрос
+     * @param type тип поиска (в названиях, в авторах)
+     * @return список книг, удовлетворяющих поисковому запросу
+     */
+    public List<Book> getBooksBySearch(String request, SearchType type) {
+        String sqlQuery = "SELECT b.id,b.name,b.page_count,b.isbn,b.publish_year,"
+                + "a.fio as author,g.name as genre,b.image FROM book b "
+                + "INNER JOIN author a ON b.author_id=a.id "
+                + "INNER JOIN genre g ON b.genre_id=g.id ";
+
+        if (type.equals(SearchType.AUTHOR)) {
+            sqlQuery += "WHERE LOWER(a.fio) LIKE '%" + request.toLowerCase() + "%' ORDER BY b.name;";
+        } else if (type.equals(SearchType.TITLE)) {
+            sqlQuery += "WHERE LOWER(b.name) LIKE '%" + request.toLowerCase() + "%' ORDER BY b.name;";
+        }
+
+        return selectBooksByQuery(sqlQuery);
     }
 
     /**

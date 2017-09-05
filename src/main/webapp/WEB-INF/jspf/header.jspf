@@ -26,11 +26,11 @@
             </div>
 
             <div id="search">
-                <form action="#">
+                <form action="main.jsp">
                     <input type="text" name="searchRequest" title="request"/>
                     <select name="searchType" title="field">
+                        <option>Название</option>
                         <option>Автор</option>
-                        <option>Книга</option>
                     </select>
                     <input type="submit" value="Найти" />
                 </form>
@@ -39,10 +39,10 @@
                     <!-- Проходим по всем буквам из списка русских букв и отображаем их -->
                     <% for (Character letter: rusLetters.getRussianLetters()) { %>
                         <c:choose>
-                            <!-- Если текущая буква списка равна букве из запроса, то отображаем ее жирной и без ссылки -->
-                            <!-- Т.к. это значит, что список книг на эту букву как раз отображается в данный момент -->
                             <c:when test='<%= request.getParameter("letter") != null
                                             && request.getParameter("letter").equals(Character.toString(letter))%>'>
+                                <!-- Если текущая буква списка равна букве из запроса, то отображаем ее жирной и без ссылки -->
+                                <!-- Т.к. это значит, что список книг на эту букву как раз отображается в данный момент -->
                                 <b><%=Character.toString(letter)%></b>
                             </c:when>
                             <c:otherwise>
@@ -51,9 +51,5 @@
                             </c:otherwise>
                         </c:choose>
                     <% }%>
-
-
-
-
                 </p>
             </div>

@@ -1,6 +1,7 @@
 <%@ page import="library.beans.book.Book" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="library.enums.SearchType" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
@@ -27,6 +28,18 @@
                 // Если делается запрос по первой букве в названии
                 if (request.getParameter("letter") != null) {
                     currentBookList = books.getBooksByFirstLetter(request.getParameter("letter"));
+                }
+
+                // Если производится поиск по определенным параметрам
+                if (request.getParameter("searchRequest") != null) {
+                    String searchRequest = request.getParameter("searchRequest");
+                    SearchType searchType = SearchType.TITLE;   // По умолчанию ищем в названиях книг
+                    // Но если в поле поиска выбрана опция "Автор", то по автору
+                    if (request.getParameter("searchType").equals("Автор")) {
+                        searchType = SearchType.AUTHOR;
+                    }
+
+                    currentBookList = books.getBooksBySearch(searchRequest, searchType);
                 }
 
                 // Сохраняем сформированный список в сессию

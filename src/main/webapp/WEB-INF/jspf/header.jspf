@@ -36,8 +36,24 @@
                 </form>
                 <jsp:useBean id="rusLetters" class="library.beans.LetterList" scope="application" />
                 <p>
-                    <c:forEach var="letter" items="${rusLetters.russianLetters}">
-                        <a href="main.jsp?letter=${letter}">${letter}</a>
-                    </c:forEach>
+                    <!-- Проходим по всем буквам из списка русских букв и отображаем их -->
+                    <% for (Character letter: rusLetters.getRussianLetters()) { %>
+                        <c:choose>
+                            <!-- Если текущая буква списка равна букве из запроса, то отображаем ее жирной и без ссылки -->
+                            <!-- Т.к. это значит, что список книг на эту букву как раз отображается в данный момент -->
+                            <c:when test='<%= request.getParameter("letter") != null
+                                            && request.getParameter("letter").equals(Character.toString(letter))%>'>
+                                <b><%=Character.toString(letter)%></b>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- Иначе отображаем букву в виде ссылки -->
+                                <a href="main.jsp?letter=<%=letter%>"><%=letter%></a>
+                            </c:otherwise>
+                        </c:choose>
+                    <% }%>
+
+
+
+
                 </p>
             </div>

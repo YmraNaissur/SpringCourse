@@ -39,7 +39,10 @@
                         searchType = SearchType.AUTHOR;
                     }
 
-                    currentBookList = books.getBooksBySearch(searchRequest, searchType);
+                    // Нужно, чтобы в строке поиска было что-то введено
+                    if (searchRequest != null && !searchRequest.trim().equals("")) {
+                        currentBookList = books.getBooksBySearch(searchRequest, searchType);
+                    }
                 }
 
                 // Сохраняем сформированный список в сессию
@@ -48,6 +51,7 @@
 
             <div id="content">
                 <table width="100%">
+                    <p id="bookFound">Найдено книг: ${currentBookList.size()}</p>
                     <c:forEach var="book" items="${currentBookList}">
                         <tr>
                             <td align="center" width="200">

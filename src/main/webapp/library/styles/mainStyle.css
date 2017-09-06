@@ -17,6 +17,12 @@ hr {
     margin-bottom: 30px;
 }
 
+#bookFound {
+    color: green;
+    font-family: "Book Antiqua", "Arial", serif;
+    font-size: 16px;
+}
+
 #container {
     background-color: beige;
     width: 100%;

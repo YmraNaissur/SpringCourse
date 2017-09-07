@@ -10,8 +10,36 @@
         <% request.setCharacterEncoding("UTF-8"); %>
 
         <%
+            // Сохраняем имя пользователя в сессию
             if (request.getSession().getAttribute("userName") == null) {
                 request.getSession().setAttribute("userName", request.getParameter("userName"));
+            }
+
+            // Сохраняем поисковый запрос в сессию
+            String searchString = "";
+            if (request.getParameter("searchRequest") != null) {
+                // Если в строке запроса присутствует параметр searchRequest,
+                // то сохраняем его в сессию
+                searchString = request.getParameter("searchRequest");
+                session.setAttribute("searchString", searchString);
+            } else if (session.getAttribute("searchString") != null) {
+                // Если такого параметра нет в запросе, достаем его значение из сессии
+                searchString = session.getAttribute("searchString").toString();
+            } else {
+                // Если же и в сессии его нет, сохраняем туда текущее значение
+                session.setAttribute("searchString", searchString);
+            }
+
+            // Сохраняем тип поискового запроса (по автору или по названию) в сессию
+            // По аналогии с сохранением строки поиска
+            String typeOfSearch = "Автор";
+            if (request.getParameter("searchType") != null) {
+                typeOfSearch = request.getParameter("searchType");
+                session.setAttribute("searchType", typeOfSearch);
+            } else if (session.getAttribute("searchType") != null) {
+                typeOfSearch = session.getAttribute("searchType").toString();
+            } else {
+                session.setAttribute("searchType", typeOfSearch);
             }
         %>
 
@@ -27,13 +55,28 @@
 
             <div id="search">
                 <form action="main.jsp">
-                    <input type="text" name="searchRequest" title="request"/>
+                    <input type="text" name="searchRequest" value="<%=searchString%>" title="request"/>
                     <select name="searchType" title="field">
-                        <option>Название</option>
-                        <option>Автор</option>
+                        <%
+                            // По умолчанию будет выбран пункт списка типов поиска,
+                            // Зависящий от того, что было сохранено в сессии.
+                            if (typeOfSearch != null) {
+                                if (typeOfSearch.equals("Название")) { %>
+
+                                    <option selected>Название</option>
+                                    <option>Автор</option>
+
+                                <%} else if (typeOfSearch.equals("Автор")) {%>
+                                    <option>Название</option>
+                                    <option selected>Автор</option>
+                                <%}
+                            }
+                        %>
+
                     </select>
                     <input type="submit" value="Найти" />
                 </form>
+
                 <jsp:useBean id="rusLetters" class="library.beans.LetterList" scope="application" />
                 <p>
                     <!-- Проходим по всем буквам из списка русских букв и отображаем их -->

@@ -26,7 +26,7 @@ public class BookList {
      * @return список, содержащий все книги из таблицы book
      */
     private List<Book> getBooks() {
-        return selectBooksByQuery("SELECT b.id,b.name,b.page_count,b.isbn,b.publish_year,"
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
                 + "a.fio as author,g.name as genre,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id"
@@ -39,7 +39,7 @@ public class BookList {
      * @return список книг, написанных автором с указанным id
      */
     public List<Book> getBooksByAuthor(long author_id) {
-        return selectBooksByQuery("SELECT b.id,b.name,b.page_count,b.isbn,b.publish_year,"
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
                 + "a.fio as author,g.name as genre,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id "
@@ -52,7 +52,7 @@ public class BookList {
      * @return список книг, у которых в названии первая буква равна letter
      */
     public List<Book> getBooksByFirstLetter(String letter) {
-        return selectBooksByQuery("SELECT b.id,b.name,b.page_count,b.isbn,b.publish_year,"
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
                 + "a.fio as author,g.name as genre,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id "
@@ -66,7 +66,7 @@ public class BookList {
      * @return список книг, удовлетворяющих поисковому запросу
      */
     public List<Book> getBooksBySearch(String request, SearchType type) {
-        String sqlQuery = "SELECT b.id,b.name,b.page_count,b.isbn,b.publish_year,"
+        String sqlQuery = "SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
                 + "a.fio as author,g.name as genre,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id ";
@@ -86,7 +86,7 @@ public class BookList {
      * @return Объект класса Blob, представляющий собой изображение
      */
     public Blob getImageByBookId(long id) {
-        return selectBooksByQuery("SELECT b.id,b.name,b.page_count,b.isbn,b.image,"
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.image,"
                 + "b.genre_id as genre,b.author_id as author FROM book b WHERE id=" + id).get(0).getImage();
     }
 
@@ -109,8 +109,9 @@ public class BookList {
 
             // Заполняем booksByQuery записями из таблицы book соответственно переданному запросу
             while (rs.next()) {
-                booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name"), rs.getInt("page_count"),
-                        rs.getString("isbn"), rs.getBlob("image"), rs.getString("genre"), rs.getString("author")));
+                booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name"), rs.getBlob("content"),
+                        rs.getInt("page_count"), rs.getString("isbn"), rs.getBlob("image"),
+                        rs.getString("genre"), rs.getString("author")));
             }
         } catch (SQLException e) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);

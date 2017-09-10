@@ -11,6 +11,7 @@ import java.sql.Blob;
 public class Book {
     private int id; // ИД
     private String name;    // Название книги
+    private Blob content;   // Содержимое книги
     private int pageCount;  // Количество страниц
     private String isbn;    // ISBN книги
     private String genre;   // Жанр
@@ -21,9 +22,10 @@ public class Book {
         // Конструктор по умолчанию
     }
 
-    Book(int id, String name, int pageCount, String isbn, Blob image, String genre, String author) {
+    Book(int id, String name, Blob content, int pageCount, String isbn, Blob image, String genre, String author) {
         this.id = id;
         this.name = name;
+        this.content = content;
         this.pageCount = pageCount;
         this.isbn = isbn;
         this.genre = genre;
@@ -47,6 +49,14 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Blob getContent() {
+        return content;
+    }
+
+    public void setContent(Blob content) {
+        this.content = content;
     }
 
     public int getPageCount() {

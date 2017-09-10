@@ -91,6 +91,16 @@ public class BookList {
     }
 
     /**
+     * Получаем содержимое книги с определенным id
+     * @param id ИД книги
+     * @return Объект класса Blob, представляющий собой содержимое
+     */
+    public Blob getContentByBookId(long id) {
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.image,"
+                + "b.genre_id as genre,b.author_id as author FROM book b WHERE id=" + id).get(0).getContent();
+    }
+
+    /**
      * Метод возвращает список книг в соответствии с SQL-запросом
      * @param query SQL-запрос
      * @return список книг, удовлетворяющих SQL-запросу query

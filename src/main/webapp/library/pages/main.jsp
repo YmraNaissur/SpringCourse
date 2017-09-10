@@ -55,7 +55,7 @@
                     <c:forEach var="book" items="${currentBookList}">
                         <tr>
                             <td align="center" width="200">
-                                <img class="bookCover" width="140" height="200" src="<c:url value="///imageServlet?id=${book.id}"/>" />
+                                <img class="bookCover" width="140" height="200" src="<c:url value="/imageServlet?id=${book.id}"/>" />
                             </td>
                             <td>
                                 <h3 class="bookHeader"> <c:out value="${book.name}" /></h3>
@@ -63,6 +63,7 @@
                                 <p class="bookInfo"><b>ISBN:</b> <c:out value="${book.isbn}" /></p>
                                 <p class="bookInfo"><b>Жанр:</b> <c:out value="${book.genre}" /></p>
                                 <p class="bookInfo"><b>Автор:</b> <c:out value="${book.author}" /></p>
+                                <p class="bookInfo"><b><a href="<c:url value="/processContent?id=${book.id}" />">Читать</a></b></p>
                             </td>
                         </tr>
                         <tr>

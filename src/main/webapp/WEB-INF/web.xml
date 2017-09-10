@@ -39,6 +39,12 @@
         <servlet-class>library.servlets.ImageServlet</servlet-class>
     </servlet>
 
+    <!-- Сервлет, отвечающий за отображение содержимого книги -->
+    <servlet>
+        <servlet-name>processContent</servlet-name>
+        <servlet-class>library.servlets.ProcessContent</servlet-class>
+    </servlet>
+
     <!-- Мэппинг первого сервлета -->
     <servlet-mapping>
         <servlet-name>firstServlet</servlet-name>
@@ -67,6 +73,12 @@
     <servlet-mapping>
         <servlet-name>imageServlet</servlet-name>
         <url-pattern>/imageServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Мэппинг серлета, отвечающего за отображение содержимого книги -->
+    <servlet-mapping>
+        <servlet-name>processContent</servlet-name>
+        <url-pattern>/processContent</url-pattern>
     </servlet-mapping>
 
     <session-config>

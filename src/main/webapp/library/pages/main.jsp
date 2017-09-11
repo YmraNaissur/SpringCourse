@@ -63,6 +63,7 @@
                                 <p class="bookInfo"><b>ISBN:</b> <c:out value="${book.isbn}" /></p>
                                 <p class="bookInfo"><b>Жанр:</b> <c:out value="${book.genre}" /></p>
                                 <p class="bookInfo"><b>Автор:</b> <c:out value="${book.author}" /></p>
+                                <p class="bookInfo"><b>Год издания:</b> <c:out value="${book.publishYear.year + 1900}" /></p>
                                 <p class="bookInfo"><b><a href="<c:url value="/processContent?id=${book.id}" />">Читать</a></b></p>
                             </td>
                         </tr>

@@ -1,12 +1,13 @@
 package library.beans.book;
 
 import java.sql.Blob;
+import java.sql.Date;
 
 /**
  * naissur
  * 25.08.2017
- * Класс, инкапсулирующий информацию о книге. Пока только id и название.
- * Позже добавлю остальную информацию.
+ * Класс, инкапсулирующий информацию о книге. Пока всё, кроме издателя.
+ * Позже добавлю.
  */
 public class Book {
     private int id; // ИД
@@ -16,13 +17,15 @@ public class Book {
     private String isbn;    // ISBN книги
     private String genre;   // Жанр
     private String author;  // Автор
+    private Date publishYear;   // Год выпуска
     private Blob image; // Изображение обложки книги
 
     public Book() {
         // Конструктор по умолчанию
     }
 
-    Book(int id, String name, Blob content, int pageCount, String isbn, Blob image, String genre, String author) {
+    Book(int id, String name, Blob content, int pageCount, String isbn,
+            String genre, String author, Date publishYear, Blob image) {
         this.id = id;
         this.name = name;
         this.content = content;
@@ -30,6 +33,7 @@ public class Book {
         this.isbn = isbn;
         this.genre = genre;
         this.author = author;
+        this.publishYear = publishYear;
         this.image = image;
     }
 
@@ -51,7 +55,7 @@ public class Book {
         this.name = name;
     }
 
-    public Blob getContent() {
+    Blob getContent() {
         return content;
     }
 
@@ -89,6 +93,14 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Date getPublishYear() {
+        return publishYear;
+    }
+
+    public void setPublishYear(Date publishYear) {
+        this.publishYear = publishYear;
     }
 
     Blob getImage() {

@@ -86,7 +86,7 @@ public class BookList {
      * @return Объект класса Blob, представляющий собой изображение
      */
     public Blob getImageByBookId(long id) {
-        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.image,"
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,b.image,"
                 + "b.genre_id as genre,b.author_id as author FROM book b WHERE id=" + id).get(0).getImage();
     }
 
@@ -96,7 +96,7 @@ public class BookList {
      * @return Объект класса Blob, представляющий собой содержимое
      */
     public Blob getContentByBookId(long id) {
-        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.image,"
+        return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,b.image,"
                 + "b.genre_id as genre,b.author_id as author FROM book b WHERE id=" + id).get(0).getContent();
     }
 
@@ -120,8 +120,8 @@ public class BookList {
             // Заполняем booksByQuery записями из таблицы book соответственно переданному запросу
             while (rs.next()) {
                 booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name"), rs.getBlob("content"),
-                        rs.getInt("page_count"), rs.getString("isbn"), rs.getBlob("image"),
-                        rs.getString("genre"), rs.getString("author")));
+                        rs.getInt("page_count"), rs.getString("isbn"), rs.getString("genre"),
+                        rs.getString("author"), rs.getDate("publish_year"), rs.getBlob("image")));
             }
         } catch (SQLException e) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);

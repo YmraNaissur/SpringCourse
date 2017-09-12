@@ -6,8 +6,7 @@ import java.sql.Date;
 /**
  * naissur
  * 25.08.2017
- * Класс, инкапсулирующий информацию о книге. Пока всё, кроме издателя.
- * Позже добавлю.
+ * Класс, инкапсулирующий информацию о книге.
  */
 public class Book {
     private int id; // ИД
@@ -18,6 +17,7 @@ public class Book {
     private String genre;   // Жанр
     private String author;  // Автор
     private Date publishYear;   // Год выпуска
+    private String publisher;   // Издатель
     private Blob image; // Изображение обложки книги
 
     public Book() {
@@ -25,7 +25,7 @@ public class Book {
     }
 
     Book(int id, String name, Blob content, int pageCount, String isbn,
-            String genre, String author, Date publishYear, Blob image) {
+            String genre, String author, Date publishYear, String publisher, Blob image) {
         this.id = id;
         this.name = name;
         this.content = content;
@@ -34,6 +34,7 @@ public class Book {
         this.genre = genre;
         this.author = author;
         this.publishYear = publishYear;
+        this.publisher = publisher;
         this.image = image;
     }
 
@@ -101,6 +102,14 @@ public class Book {
 
     public void setPublishYear(Date publishYear) {
         this.publishYear = publishYear;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     Blob getImage() {

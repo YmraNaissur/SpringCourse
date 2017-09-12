@@ -27,9 +27,10 @@ public class BookList {
      */
     private List<Book> getBooks() {
         return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
-                + "a.fio as author,g.name as genre,b.image FROM book b "
+                + "a.fio as author,g.name as genre,p.name as publisher,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
-                + "INNER JOIN genre g ON b.genre_id=g.id"
+                + "INNER JOIN genre g ON b.genre_id=g.id "
+                + "INNER JOIN publisher p ON b.publisher_id=p.id "
                 + "ORDER BY b.name;");
     }
 
@@ -40,9 +41,10 @@ public class BookList {
      */
     public List<Book> getBooksByAuthor(long author_id) {
         return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
-                + "a.fio as author,g.name as genre,b.image FROM book b "
+                + "a.fio as author,g.name as genre,p.name as publisher,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id "
+                + "INNER JOIN publisher p ON b.publisher_id=p.id "
                 + "WHERE author_id=" + author_id + " ORDER BY b.name;");
     }
 
@@ -53,9 +55,10 @@ public class BookList {
      */
     public List<Book> getBooksByFirstLetter(String letter) {
         return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
-                + "a.fio as author,g.name as genre,b.image FROM book b "
+                + "a.fio as author,g.name as genre,p.name as publisher,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
                 + "INNER JOIN genre g ON b.genre_id=g.id "
+                + "INNER JOIN publisher p ON b.publisher_id=p.id "
                 + "WHERE SUBSTR(b.name,1,1)='" + letter + "' ORDER BY b.name;");
     }
 
@@ -67,9 +70,10 @@ public class BookList {
      */
     public List<Book> getBooksBySearch(String request, SearchType type) {
         String sqlQuery = "SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,"
-                + "a.fio as author,g.name as genre,b.image FROM book b "
+                + "a.fio as author,g.name as genre,p.name as publisher,b.image FROM book b "
                 + "INNER JOIN author a ON b.author_id=a.id "
-                + "INNER JOIN genre g ON b.genre_id=g.id ";
+                + "INNER JOIN genre g ON b.genre_id=g.id "
+                + "INNER JOIN publisher p ON b.publisher_id=p.id ";
 
         if (type.equals(SearchType.AUTHOR)) {
             sqlQuery += "WHERE LOWER(a.fio) LIKE '%" + request.toLowerCase() + "%' ORDER BY b.name;";
@@ -87,7 +91,8 @@ public class BookList {
      */
     public Blob getImageByBookId(long id) {
         return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,b.image,"
-                + "b.genre_id as genre,b.author_id as author FROM book b WHERE id=" + id).get(0).getImage();
+                + "b.genre_id as genre,b.author_id as author,b.publisher_id as publisher "
+                + "FROM book b WHERE id=" + id).get(0).getImage();
     }
 
     /**
@@ -97,7 +102,8 @@ public class BookList {
      */
     public Blob getContentByBookId(long id) {
         return selectBooksByQuery("SELECT b.id,b.name,b.content,b.page_count,b.isbn,b.publish_year,b.image,"
-                + "b.genre_id as genre,b.author_id as author FROM book b WHERE id=" + id).get(0).getContent();
+                + "b.genre_id as genre,b.author_id as author,b.publisher_id as publisher" +
+                " FROM book b WHERE id=" + id).get(0).getContent();
     }
 
     /**
@@ -121,7 +127,8 @@ public class BookList {
             while (rs.next()) {
                 booksByQuery.add(new Book(rs.getInt("id"), rs.getString("name"), rs.getBlob("content"),
                         rs.getInt("page_count"), rs.getString("isbn"), rs.getString("genre"),
-                        rs.getString("author"), rs.getDate("publish_year"), rs.getBlob("image")));
+                        rs.getString("author"), rs.getDate("publish_year"), rs.getString("publisher"),
+                        rs.getBlob("image")));
             }
         } catch (SQLException e) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, e);

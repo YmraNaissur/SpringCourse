@@ -1,0 +1,2 @@
+There is some text.
+We need to read and display it on the console.

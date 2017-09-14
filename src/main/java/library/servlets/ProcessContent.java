@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 public class ProcessContent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/pdf");
+
         long id = Long.valueOf(req.getParameter("id")); // Получили id книги из запроса
         Blob content = new BookList().getContentByBookId(id);   // Получили контент по id
 

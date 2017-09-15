@@ -15,6 +15,11 @@
         </init-param>
     </servlet>
 
+    <!-- Страницы по умолчанию -->
+    <welcome-file-list>
+        <welcome-file>/library/index.xhtml</welcome-file>
+    </welcome-file-list>
+
     <!-- Сервлет-калькулятор -->
     <servlet>
         <servlet-name>calculatorServlet</servlet-name>
@@ -43,6 +48,16 @@
     <servlet>
         <servlet-name>processContent</servlet-name>
         <servlet-class>library.servlets.ProcessContent</servlet-class>
+    </servlet>
+
+    <!-- HelloWorld на JSF -->
+    <servlet>
+        <servlet-name>facesServlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>facesServlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     </servlet>
 
     <!-- Мэппинг первого сервлета -->
@@ -81,16 +96,21 @@
         <url-pattern>/processContent</url-pattern>
     </servlet-mapping>
 
+    <!-- Мэппинг HelloWorld на JSF -->
+    <servlet-mapping>
+        <servlet-name>facesServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>facesServlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
-    <!-- Страницы по умолчанию -->
-    <welcome-file-list>
-        <welcome-file>/library/index.jsp</welcome-file>
-    </welcome-file-list>
 
     <!-- Страницы с ошибками -->
     <error-page>
